@@ -19,7 +19,8 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: "/auth/google/callback"
+      callbackURL: "/auth/google/callback",
+      proxy: true
     },
     (accessToken, refreshToken, profile, done) => {
       // we're finding the user as per the Google Strategy. If this user has already logged in before we will exit the callback and authenticate the user. If they are not an existing user we are going to create a new user using Mongoose, save it to our mongodb database and then authenticate the user.
