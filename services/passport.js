@@ -22,19 +22,18 @@ passport.use(
       callbackURL: "/auth/google/callback",
       proxy: true
     },
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       // we're finding the user as per the Google Strategy. If this user has already logged in before we will exit the callback and authenticate the user. If they are not an existing user we are going to create a new user using Mongoose, save it to our mongodb database and then authenticate the user.
-      User.findOne({ googleId: profile.id }).then(existingUser => {
-        if (existingUser) {
-          // we already have a record with the given profile id
-          done(null, existingUser);
-        } else {
-          // we dont have a user record with this ID, make a new record
-          new User({ googleId: profile.id })
-            .save()
-            .then(user => done(null, user));
-        }
-      });
+      const existingUser = await User.findOne({ googleId: profile.id });
+
+      if (existingUser) {
+        // we already have a record with the given profile id
+        return done(null, existingUser);
+      }
+
+      // we dont have a user record with this ID, make a new record
+      const user = await new User({ googleId: profile.id }).save();
+      done(null, user);
     }
   )
 );

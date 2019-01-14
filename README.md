@@ -17,3 +17,16 @@
 
 <!-- 5. client_id=63809856305-e3c7n2mhbk9fvrfv694e3dtigat2vjt4.apps.googleusercontent.com -->
 <!-- Client ID identifies our application to the google server. -->
+
+How to write an async await function
+write a function to retrieve a blob of json
+make an ajax request! Use the 'fetch' function.
+
+const fetchAlbums = async () => {
+  const res = await fetch('https://rallycoding.herokuapp.com/api/music_albums')
+  const json = await res.json()
+
+  console.log(json);
+}
+
+fetchAlbums();
