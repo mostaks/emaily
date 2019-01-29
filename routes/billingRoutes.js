@@ -1,3 +1,4 @@
+// Our route handler file managing all the routes of our stripe payment flow
 const keys = require("../config/keys");
 
 const stripe = require("stripe")(keys.stripeSecretKey);

@@ -1,3 +1,4 @@
+// Route handler code to handle our google oauth flow
 const passport = require("passport");
 
 module.exports = app => {
